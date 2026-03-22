@@ -3,7 +3,7 @@ import pandas as pd
 
 def preprocess(data):
 
-    # Pattern for 12-hour format
+    # Pattern for 12-hour format 
     pattern12 = r'\d{1,2}/\d{1,2}/\d{2,4},\s\d{1,2}:\d{2}\s(?:AM|PM)\s-\s'
 
     # Pattern for 24-hour format
