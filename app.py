@@ -12,7 +12,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# CUSTOM CSS (BACKGROUND + BUTTON STYLE)
+# CUSTOM CSS
 st.markdown("""
 <style>
 
@@ -39,6 +39,39 @@ section[data-testid="stSidebar"] {
     color: white;
 }
 
+/* FEATURE BLOCKS */
+
+.feature-container {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.feature-card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.feature-card:hover{
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.1);
+}
+
+.feature-title{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.feature-desc{
+    font-size:14px;
+    opacity:0.8;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -49,6 +82,69 @@ st.sidebar.markdown("Upload your exported WhatsApp chat file.")
 # TITLE
 st.title("📊 WhatsApp Chat Analyzer Dashboard")
 st.markdown("Analyze your WhatsApp conversations with beautiful insights.")
+
+# FEATURE BLOCKS (FRONT PAGE INFO)
+st.markdown("""
+<div class="feature-container">
+
+<div class="feature-card">
+<div class="feature-title">📊 Overview</div>
+<div class="feature-desc">
+Shows total messages, words, media files and links shared in the chat.
+</div>
+</div>
+
+<div class="feature-card">
+<div class="feature-title">📅 Timeline</div>
+<div class="feature-desc">
+Visualize monthly and daily chat activity to understand conversation trends.
+</div>
+</div>
+
+<div class="feature-card">
+<div class="feature-title">🔥 Activity</div>
+<div class="feature-desc">
+Find the busiest days, months and active hours using heatmaps.
+</div>
+</div>
+
+<div class="feature-card">
+<div class="feature-title">☁ Word Analysis</div>
+<div class="feature-desc">
+Generate word clouds and discover the most frequently used words.
+</div>
+</div>
+
+<div class="feature-card">
+<div class="feature-title">😀 Emoji Insights</div>
+<div class="feature-desc">
+Identify the most used emojis and visualize them in a pie chart.
+</div>
+</div>
+
+<div class="feature-card">
+<div class="feature-title">👥 Busy Users</div>
+<div class="feature-desc">
+Discover which participants send the most messages in group chats.
+</div>
+</div>
+
+<div class="feature-card">
+<div class="feature-title">📈 Trends</div>
+<div class="feature-desc">
+Analyze long-term chat patterns and conversation spikes.
+</div>
+</div>
+
+<div class="feature-card">
+<div class="feature-title">⚡ Instant Insights</div>
+<div class="feature-desc">
+Upload your exported WhatsApp chat and get analytics instantly.
+</div>
+</div>
+
+</div>
+""", unsafe_allow_html=True)
 
 uploaded_file = st.sidebar.file_uploader("Upload Chat File")
 
@@ -91,7 +187,6 @@ if uploaded_file is not None:
 
             num_messages, words, num_media_messages, num_links = helper.fetch_stats(selected_user, df)
 
-        # TABS
         tab1, tab2, tab3, tab4, tab5 = st.tabs([
             "📊 Overview",
             "📅 Timeline",
@@ -257,3 +352,5 @@ if uploaded_file is not None:
 
 st.markdown("---")
 st.markdown("Built with ❤️ using Streamlit")
+
+
